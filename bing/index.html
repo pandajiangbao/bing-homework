@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Panda</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--ExtJs框架开始-->
+    <script type="text/javascript" src="../adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css"/>
+    <!--ExtJs框架结束-->
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            var bingContainer = new Ext.Container({
+                renderTo: 'bing',
+                layout: 'table',
+                cls: 'table-container',
+                layoutConfig: {
+                    columns: 10
+                },
+                style: 'margin-top:166px;margin-left:90px;',
+                items: [{
+                    xtype: 'box',
+                    height: 50,
+                    width: 130,
+                    style: 'vertical-align: bottom;',
+                    autoEl: {
+                        tag: 'img',
+                        src: 'logo.png'
+                    },
+                }, {
+                    id: 'tabpanel',
+                    xtype: 'tabpanel',
+                    style: 'margin-left:20px;',
+                    plain: true,
+                    border: false,
+                    width: 548,
+                    height: 75,
+                    activeTab: 0,
+                    items: [{
+                        id: 'input-local',
+                        xtype: 'textfield',
+                        title: '国内版',
+                        style: 'display: block;width:548px;height:47px;font-size: 20px;border-radius: 6px;',
+                    }, {
+                        id: 'input-national',
+                        xtype: 'textfield',
+                        title: '国际版',
+                        style: 'display: block;width:548px;height:47px;font-size: 20px;border-radius: 6px;',
+                    }]
+                },{
+                    id: 'search-icon',
+                    xtype: 'box',
+                    height: 25,
+                    width: 25,
+                    cls:'icon',
+                    autoEl: {
+                        tag: 'img',
+                        src: 'search.png'
+                    },
+                }
+                ]
+            });
+            Ext.fly('ext-gen12').remove();
+            var element = Ext.fly('search-icon');
+            element.on('click',function () {
+                var tab = Ext.getCmp('tabpanel');
+                if (tab.getActiveTab().id === 'input-local') {
+                    var inputLocal = Ext.fly('input-local').getValue();
+                    document.location.href="https://cn.bing.com/search?ensearch=0&q="+inputLocal;
+                }
+                else {
+                    var inputNational = Ext.fly('input-national').getValue();
+                    document.location.href="https://cn.bing.com/search?ensearch=1&q="+inputNational;
+                }
+            })
+        });
+
+    </script>
+    <style type="text/css">
+        body {
+            background-image: url("bing.jpg");
+            background-repeat: no-repeat;
+        }
+        .table-container td:first-child{
+            vertical-align: bottom;
+        }
+        .table-container td:nth-child(3){
+            vertical-align: middle;
+        }
+        .icon{
+            position: relative;
+            left: -35px;
+            top: 13px;
+            cursor: pointer;
+        }
+        .x-tab-right{
+            background-image: unset !important;
+            background-color: #FFFFFF !important;
+        }
+        .x-tab-left{
+            background-image: unset !important;
+            background-color: #FFFFFF !important;
+        }
+        .x-tab-strip-inner{
+            background-image: unset !important;
+            background-color: #FFFFFF !important;
+        }
+        .x-tab-strip-top{
+            border-bottom: unset !important;
+        }
+        .x-tab-panel-body {
+             background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+<div id="bing"></div>
+</body>
+</html>
